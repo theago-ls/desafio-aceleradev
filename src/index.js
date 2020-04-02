@@ -22,7 +22,7 @@ async function executeChallenge(){
         const response = await axios.get('https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=b865f267049c87fb70d4173392ed2363fb53a981')
 
         if(response.status === 200){            
-            fs.writeFileSync('answers.json', JSON.stringify(response.data));
+            fs.writeFileSync('answers.json', JSON.stringify(response.data))
                         
             var data = fs.readFileSync('answers.json')
             var dataJSON = JSON.parse(data)  
@@ -37,7 +37,7 @@ async function executeChallenge(){
 
             dataJSON.resumo_criptografico = resumo
                         
-            fs.writeFileSync('answers.json', JSON.stringify(dataJSON));
+            fs.writeFileSync('answers.json', JSON.stringify(dataJSON))
 
             const file = fs.createReadStream('answers.json')
 
@@ -50,7 +50,7 @@ async function executeChallenge(){
                 headers: form.getHeaders()
             })
         
-            console.log(resposta.data);
+            console.log(resposta.data)
         }
     } catch (err) {
         console.error(err)
@@ -58,19 +58,19 @@ async function executeChallenge(){
 }
 
 function decifrar(dados, casas){
-    const vocab = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    const vocab = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
     var texto = []
 
     for(var i = 0; i < dados.length; i++){        
         if(vocab.indexOf(dados[i]) !== -1){
             var index = vocab.indexOf(dados[i])            
-            texto += vocab[(index-casas+26) % 26];
+            texto += vocab[(index-casas+26) % 26]
         }else
-            texto += dados[i];        
+            texto += dados[i]       
     }
 
     return texto
 }
 
-executeChallenge();
+executeChallenge()
